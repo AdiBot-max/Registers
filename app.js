@@ -12,12 +12,15 @@ window.register = async () => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { error } = await supabase.auth.signUp({
+  console.log("EMAIL:", email);
+  console.log("PASSWORD:", password);
+
+  const { data, error } = await supabase.auth.signUp({
     email,
     password
   });
 
-  status.innerText = error ? error.message : "Registered!";
+  console.log("SIGNUP ERROR:", error);
 };
 
 window.login = async () => {
