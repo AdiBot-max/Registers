@@ -5,3 +5,4 @@ const app = express();
 
 // 🔥 THIS LINE FIXES MIME TYPES
 app.use(express.static(path.join(process.cwd())));
+app.use(express.static("."));
