@@ -9,18 +9,22 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const status = document.getElementById("status");
 
 window.register = async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  console.log("EMAIL:", email);
-  console.log("PASSWORD:", password);
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
 
   const { data, error } = await supabase.auth.signUp({
     email,
     password
   });
 
-  console.log("SIGNUP ERROR:", error);
+  if (error) {
+    console.error("FULL ERROR:", error);
+    document.getElementById("status").innerText =
+      error.message + " | " + error.status;
+    return;
+  }
+
+  console.log("SUCCESS:", data);
 };
 
 window.login = async () => {
